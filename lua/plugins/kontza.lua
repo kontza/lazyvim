@@ -1,4 +1,73 @@
 return {
+  -- null-ls tweaks
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    opts = {
+      ensure_installed = {
+        "prettier",
+        "black",
+        "stylua",
+        "rustfmt",
+        "google_gava_format",
+        "xmllint",
+      },
+    },
+    config = function()
+      local null_ls = require("null-ls")
+      local formatting = null_ls.builtins.formatting
+      local diagnostics = null_ls.builtins.diagnostics
+      null_ls.setup({
+        debug = false,
+        sources = {
+          formatting.prettier.with({
+            extra_filetypes = { "toml" },
+            extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
+            filetypes = {
+              "javascript",
+              "javascriptreact",
+              "typescript",
+              "typescriptreact",
+              "vue",
+              "css",
+              "scss",
+              "less",
+              "html",
+              "json",
+              "jsonc",
+              "yaml",
+              "graphql",
+              "handlebars",
+            },
+          }),
+          formatting.black.with({ extra_args = { "--fast" } }),
+          formatting.stylua,
+          formatting.rustfmt,
+          formatting.google_java_format,
+          diagnostics.flake8.with({
+            args = { "--max-line-length", "88", "--format", "default", "--stdin-display-name", "$FILENAME", "-" },
+          }),
+          diagnostics.tidy,
+          formatting.xmllint,
+        },
+        on_attach = function(_, _)
+          vim.api.nvim_create_augroup("Format on save", { clear = false })
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            callback = function()
+              vim.lsp.buf.format({
+                async = true,
+                filter = function(client)
+                  return client.name == "null-ls"
+                end,
+              })
+              vim.notify("Format Done", vim.log.levels.INFO, { title = "Format" })
+            end,
+            group = "Format on save",
+          })
+        end,
+      })
+    end,
+  },
+
   -- add catppuccin
   { "catppuccin/nvim" },
 
