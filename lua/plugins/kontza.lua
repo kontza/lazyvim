@@ -1,5 +1,32 @@
 return {
-  -- null-ls tweaks
+  { "mzlogin/vim-markdown-toc" },
+  {
+    "johmsalas/text-case.nvim",
+    config = function()
+      require("textcase").setup({})
+      require("telescope").load_extension("textcase")
+    end,
+  },
+  { "tpope/vim-sleuth" },
+  { "khaveesh/vim-fish-syntax" },
+  { "simrat39/rust-tools.nvim" },
+  {
+    "norcalli/nvim-colorizer.lua",
+    ft = { "scss", "css", "html" },
+    config = function()
+      require("colorizer").setup()
+    end,
+    disable = false,
+  },
+  {
+    "lewis6991/spaceless.nvim",
+    config = function()
+      require("spaceless").setup()
+    end,
+  },
+  { "dkarter/bullets.vim" },
+  { "pearofducks/ansible-vim" },
+  { "lervag/wiki" },
   {
     "jose-elias-alvarez/null-ls.nvim",
     opts = {
@@ -222,20 +249,17 @@ return {
         "yaml",
       },
     },
-  },
-
-  -- since `vim.tbl_deep_extend`, can only merge tables and not lists, the code above
-  -- would overwrite `ensure_installed` with the new value.
-  -- If you'd rather extend the default config, use the code below instead:
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      -- add tsx and treesitter
-      vim.list_extend(opts.ensure_installed, {
-        "tsx",
-        "typescript",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        autotag = {
+          enable = true,
+        },
       })
     end,
+  },
+
+  {
+    "windwp/nvim-ts-autotag",
   },
 
   -- or you can return new options to override all the defaults
