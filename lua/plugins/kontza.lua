@@ -16,6 +16,34 @@ return {
   { "lervag/wiki" },
 
   {
+    "windwp/nvim-ts-autotag",
+    depends = "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require("nvim-ts-autotag").setup({
+        filetypes = {
+          "html",
+          "javascript",
+          "typescript",
+          "javascriptreact",
+          "typescriptreact",
+          "svelte",
+          "vue",
+          "tsx",
+          "jsx",
+          "rescript",
+          "xml",
+          "php",
+          "markdown",
+          "astro",
+          "glimmer",
+          "handlebars",
+          "hbs",
+        },
+      })
+    end,
+  },
+
+  {
     "johmsalas/text-case.nvim",
     config = function()
       require("textcase").setup({})
