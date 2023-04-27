@@ -17,7 +17,7 @@ return {
 
   {
     "windwp/nvim-ts-autotag",
-    depends = "nvim-treesitter/nvim-treesitter",
+    dependencies = "nvim-treesitter/nvim-treesitter",
     config = function()
       require("nvim-ts-autotag").setup({
         filetypes = {
@@ -53,11 +53,9 @@ return {
 
   {
     "norcalli/nvim-colorizer.lua",
-    ft = { "scss", "css", "html" },
     config = function()
       require("colorizer").setup()
     end,
-    disable = false,
   },
 
   {
