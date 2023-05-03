@@ -15,6 +15,8 @@ return {
 
   { "lervag/wiki" },
 
+  { "mfussenegger/nvim-jdtls" },
+
   {
     "windwp/nvim-ts-autotag",
     dependencies = "nvim-treesitter/nvim-treesitter",
