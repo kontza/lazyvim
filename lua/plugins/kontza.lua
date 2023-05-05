@@ -5,7 +5,15 @@ return {
 
   { "khaveesh/vim-fish-syntax" },
 
-  { "simrat39/rust-tools.nvim" },
+  {
+    "simrat39/rust-tools.nvim",
+    dependencies = "neovim/nvim-lspconfig",
+    opts = {
+      server = {
+        cmd = { "ra-multiplex" },
+      },
+    },
+  },
 
   { "lewis6991/spaceless.nvim" },
 
