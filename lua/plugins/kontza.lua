@@ -6,6 +6,18 @@ return {
   { "khaveesh/vim-fish-syntax" },
 
   {
+    "folke/which-key.nvim",
+    config = function()
+      local wk = require("which-key")
+      wk.setup({
+        window = {
+          border = vim.g.border_type,
+        },
+      })
+    end,
+  },
+
+  {
     "simrat39/rust-tools.nvim",
     dependencies = "neovim/nvim-lspconfig",
     opts = {
