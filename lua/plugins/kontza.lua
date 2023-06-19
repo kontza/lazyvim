@@ -6,6 +6,13 @@ return {
   { "khaveesh/vim-fish-syntax" },
 
   {
+    "L3MON4D3/LuaSnip",
+    config = function()
+      require("luasnip").filetype_extend("typescript", { "javascript" })
+    end,
+  },
+
+  {
     "folke/which-key.nvim",
     config = function()
       local wk = require("which-key")
