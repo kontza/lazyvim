@@ -8,9 +8,12 @@ return {
   {
     "L3MON4D3/LuaSnip",
     config = function()
+      require("luasnip").filetype_extend("svelte", { "javascript" })
       require("luasnip").filetype_extend("typescript", { "javascript" })
     end,
   },
+
+  { "leafOfTree/vim-svelte-plugin" },
 
   {
     "folke/which-key.nvim",
