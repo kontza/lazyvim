@@ -6,6 +6,21 @@ return {
   { "khaveesh/vim-fish-syntax" },
 
   {
+    "folke/noice.nvim",
+    require("lualine").setup({
+      sections = {
+        lualine_x = {
+          {
+            require("noice").api.status.mode.get,
+            cond = require("noice").api.status.mode.has,
+            color = { fg = "#ff9e64" },
+          },
+        },
+      },
+    }),
+  },
+
+  {
     "L3MON4D3/LuaSnip",
     config = function()
       require("luasnip").filetype_extend("svelte", { "javascript" })
