@@ -7,17 +7,19 @@ return {
 
   {
     "folke/noice.nvim",
-    require("lualine").setup({
-      sections = {
-        lualine_x = {
-          {
-            require("noice").api.status.mode.get,
-            cond = require("noice").api.status.mode.has,
-            color = { fg = "#ff9e64" },
+    config = function()
+      require("lualine").setup({
+        sections = {
+          lualine_x = {
+            {
+              require("noice").api.status.mode.get,
+              cond = require("noice").api.status.mode.has,
+              color = { fg = "#ff9e64" },
+            },
           },
         },
-      },
-    }),
+      })
+    end,
   },
 
   {
