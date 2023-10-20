@@ -1,4 +1,77 @@
+local prettier_filetypes = {
+  "css",
+  "graphql",
+  "handlebars",
+  "html",
+  "javascript",
+  "javascriptreact",
+  "json",
+  "jsonc",
+  "less",
+  "scss",
+  "svelte",
+  "toml",
+  "typescript",
+  "typescriptreact",
+  "vue",
+  "yaml",
+}
+local fmt_by_ft = {}
+for _, ft in ipairs(prettier_filetypes) do
+  fmt_by_ft[ft] = { { "prettierd", "prettier" } }
+end
+fmt_by_ft["java"] = { "google_java_format" }
+fmt_by_ft["lua"] = "stylua"
+fmt_by_ft["python"] = { "isort", "black" }
+fmt_by_ft["rust"] = { "rustfmt" }
+fmt_by_ft["xml"] = { "xmllint" }
+for _, ft in ipairs({ "c", "cpp", "cs", "java", "cuda", "proto", "arduino" }) do
+  fmt_by_ft[ft] = { "clang_format" }
+end
+
 return {
+  {
+    "stevearc/conform.nvim",
+    -- Everything in opts will be passed to setup()
+    opts = {
+      -- Define your formatters
+      formatters_by_ft = fmt_by_ft,
+      -- Customize formatters
+      formatters = {
+        black = {
+          prepend_args = { "--fast" },
+        },
+        prettier = {
+          prepend_args = { "--no-semi", "--single-quote", "--jsz-single-quote" },
+        },
+        shfmt = {
+          prepend_args = { "-i", "2" },
+        },
+      },
+    },
+  },
+
+  {
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters_by_ft = {
+        html = { "tidy" },
+        python = { "flake8" },
+      },
+      linters = {
+        flake8 = {
+          args = {
+            "--max-line-length",
+            "88",
+            "--format=%(path)s:%(row)d:%(col)d:%(code)s:%(text)s",
+            "--no-show-source",
+            "-",
+          },
+        },
+      },
+    },
+  },
+
   { "mzlogin/vim-markdown-toc" },
 
   { "tpope/vim-sleuth" },
@@ -128,60 +201,60 @@ return {
     },
   },
 
-  {
-    "nvimtools/none-ls.nvim",
-    opts = {
-      ensure_installed = {
-        "prettier",
-        "black",
-        "stylua",
-        "rustfmt",
-        "google_gava_format",
-        "xmllint",
-      },
-    },
-    config = function()
-      local null_ls = require("null-ls")
-      local formatting = null_ls.builtins.formatting
-      local diagnostics = null_ls.builtins.diagnostics
-      null_ls.setup({
-        debug = false,
-        sources = {
-          formatting.prettier.with({
-            extra_filetypes = { "toml" },
-            extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-            filetypes = {
-              "css",
-              "graphql",
-              "handlebars",
-              "html",
-              "javascript",
-              "javascriptreact",
-              "json",
-              "jsonc",
-              "less",
-              "scss",
-              "svelte",
-              "typescript",
-              "typescriptreact",
-              "vue",
-              "yaml",
-            },
-          }),
-          formatting.clang_format.with({
-            filetypes = { "c", "cpp", "cs", "java", "cuda", "proto", "arduino" },
-          }),
-          formatting.black.with({ extra_args = { "--fast" } }),
-          formatting.stylua,
-          formatting.rustfmt,
-          formatting.google_java_format,
-          diagnostics.flake8.with({
-            args = { "--max-line-length", "88", "--format", "default", "--stdin-display-name", "$FILENAME", "-" },
-          }),
-          diagnostics.tidy,
-          formatting.xmllint,
-        },
-      })
-    end,
-  },
+  -- {
+  --   "nvimtools/none-ls.nvim",
+  --   opts = {
+  --     ensure_installed = {
+  --       "prettier",
+  --       "black",
+  --       "stylua",
+  --       "rustfmt",
+  --       "google_gava_format",
+  --       "xmllint",
+  --     },
+  --   },
+  --   config = function()
+  --     local null_ls = require("null-ls")
+  --     local formatting = null_ls.builtins.formatting
+  --     local diagnostics = null_ls.builtins.diagnostics
+  --     null_ls.setup({
+  --       debug = false,
+  --       sources = {
+  --         formatting.prettier.with({
+  --           extra_filetypes = { "toml" },
+  --           extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
+  --           filetypes = {
+  --             "css",
+  --             "graphql",
+  --             "handlebars",
+  --             "html",
+  --             "javascript",
+  --             "javascriptreact",
+  --             "json",
+  --             "jsonc",
+  --             "less",
+  --             "scss",
+  --             "svelte",
+  --             "typescript",
+  --             "typescriptreact",
+  --             "vue",
+  --             "yaml",
+  --           },
+  --         }),
+  --         formatting.clang_format.with({
+  --           filetypes = { "c", "cpp", "cs", "java", "cuda", "proto", "arduino" },
+  --         }),
+  --         formatting.black.with({ extra_args = { "--fast" } }),
+  --         formatting.stylua,
+  --         formatting.rustfmt,
+  --         formatting.google_java_format,
+  --         diagnostics.flake8.with({
+  --           args = { "--max-line-length", "88", "--format", "default", "--stdin-display-name", "$FILENAME", "-" },
+  --         }),
+  --         diagnostics.tidy,
+  --         formatting.xmllint,
+  --       },
+  --     })
+  --   end,
+  -- },
 }
