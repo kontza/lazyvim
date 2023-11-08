@@ -1,41 +1,38 @@
-local prettier_filetypes = {
-  "css",
-  "graphql",
-  "handlebars",
-  "html",
-  "javascript",
-  "javascriptreact",
-  "json",
-  "jsonc",
-  "less",
-  "scss",
-  "svelte",
-  "toml",
-  "typescript",
-  "typescriptreact",
-  "vue",
-  "yaml",
-}
-local fmt_by_ft = {}
-for _, ft in ipairs(prettier_filetypes) do
-  fmt_by_ft[ft] = { { "prettierd", "prettier" } }
-end
-fmt_by_ft["java"] = { "google_java_format" }
-fmt_by_ft["lua"] = "stylua"
-fmt_by_ft["python"] = { "isort", "black" }
-fmt_by_ft["rust"] = { "rustfmt" }
-fmt_by_ft["xml"] = { "xmllint" }
-for _, ft in ipairs({ "c", "cpp", "cs", "java", "cuda", "proto", "arduino" }) do
-  fmt_by_ft[ft] = { "clang_format" }
-end
-
 return {
   {
     "stevearc/conform.nvim",
     -- Everything in opts will be passed to setup()
     opts = {
       -- Define your formatters
-      formatters_by_ft = fmt_by_ft,
+      formatters_by_ft = {
+        css = { "prettier" },
+        graphql = { "prettier" },
+        handlebars = { "prettier" },
+        html = { "prettier" },
+        javascript = { "prettier" },
+        javascriptreact = { "prettier" },
+        json = { "prettier" },
+        jsonc = { "prettier" },
+        less = { "prettier" },
+        scss = { "prettier" },
+        svelte = { "prettier" },
+        toml = { "prettier" },
+        typescript = { "prettier" },
+        typescriptreact = { "prettier" },
+        vue = { "prettier" },
+        yaml = { "prettier" },
+        java = { "google_java_format" },
+        lua = { "stylua" },
+        python = { "isort", "black" },
+        rust = { "rustfmt" },
+        xml = { "xmllint" },
+        c = { "clang_format" },
+        cpp = { "clang_format" },
+        cs = { "clang_format" },
+        cuda = { "clang_format" },
+        proto = { "clang_format" },
+        arduino = { "clang_format" },
+      },
       -- Customize formatters
       formatters = {
         black = {
