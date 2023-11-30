@@ -1,4 +1,5 @@
 return {
+  { "dhruvasagar/vim-table-mode" },
   {
     "stevearc/conform.nvim",
     -- Everything in opts will be passed to setup()
@@ -25,7 +26,6 @@ return {
         lua = { "stylua" },
         python = { "isort", "black" },
         rust = { "rustfmt" },
-        xml = { "xmllint" },
         c = { "clang_format" },
         cpp = { "clang_format" },
         cs = { "clang_format" },
