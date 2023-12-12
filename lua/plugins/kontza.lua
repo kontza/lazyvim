@@ -1,4 +1,5 @@
 return {
+  { "aklt/plantuml-syntax" },
   { "dhruvasagar/vim-table-mode" },
   {
     "stevearc/conform.nvim",
@@ -39,7 +40,7 @@ return {
           prepend_args = { "--fast" },
         },
         prettier = {
-          prepend_args = { "--no-semi", "--single-quote", "--jsz-single-quote" },
+          prepend_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
         },
         shfmt = {
           prepend_args = { "-i", "2" },
