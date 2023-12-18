@@ -13,7 +13,7 @@ return {
         cs = { "clang_format" },
         css = { "prettier" },
         cuda = { "clang_format" },
-        go = { "goimports" },
+        go = { "gofumpt" },
         graphql = { "prettier" },
         handlebars = { "prettier" },
         html = { "prettier" },
