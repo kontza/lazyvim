@@ -1,4 +1,5 @@
 return {
+  { "HiPhish/rainbow-delimiters.nvim" },
   { "aklt/plantuml-syntax" },
   { "dhruvasagar/vim-table-mode" },
   {
