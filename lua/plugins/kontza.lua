@@ -26,7 +26,7 @@ return {
         less = { "prettier" },
         lua = { "stylua" },
         proto = { "clang_format" },
-        python = { "isort", "black" },
+        python = { "ruff_fix", "ruff_format" },
         rust = { "rustfmt" },
         scss = { "prettier" },
         svelte = { "prettier" },
@@ -38,9 +38,6 @@ return {
       },
       -- Customize formatters
       formatters = {
-        black = {
-          prepend_args = { "--fast" },
-        },
         prettier = {
           prepend_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
         },
@@ -56,18 +53,6 @@ return {
     opts = {
       linters_by_ft = {
         html = { "tidy" },
-        python = { "flake8" },
-      },
-      linters = {
-        flake8 = {
-          args = {
-            "--max-line-length",
-            "88",
-            "--format=%(path)s:%(row)d:%(col)d:%(code)s:%(text)s",
-            "--no-show-source",
-            "-",
-          },
-        },
       },
     },
   },
