@@ -1,4 +1,9 @@
 return {
+  {
+    "ckipp01/nvim-jenkinsfile-linter",
+    dependencies = "nvim-lua/plenary.nvim",
+  },
+
   { "HiPhish/rainbow-delimiters.nvim" },
   { "aklt/plantuml-syntax" },
   { "dhruvasagar/vim-table-mode" },
