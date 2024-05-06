@@ -22,6 +22,7 @@ return {
         go = { "gofmt", "goimports" },
         graphql = { "prettier" },
         handlebars = { "prettier" },
+        htmldjango = { "prettier" },
         html = { "prettier" },
         java = { "google_java_format" },
         javascript = { "prettier" },
