@@ -7,50 +7,41 @@ return {
   -- add pyright to lspconfig
   {
     "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
-    opts = {
-      dependencies = {
-        "jose-elias-alvarez/typescript.nvim",
-        init = function()
-          require("lazyvim.util").lsp.on_attach(function(_, buffer)
+    dependencies = {
+      "jose-elias-alvarez/typescript.nvim",
+      init = function()
+        require("lazyvim.util").lsp.on_attach(function(_, buffer)
           -- stylua: ignore
           vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
-            vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
-          end)
-        end,
-      },
+          vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
+        end)
+      end,
+    },
+    ---@class PluginLspOpts
+    opts = {
       servers = {
-        -- pyright will be automatically installed with mason and loaded with lspconfig
         gopls = {},
         pyright = {
           mason = false,
-          -- settings = {
-          --   pyright = {
-          --     -- Using Ruff's import organizer
-          --     disableOrganizeImports = true,
-          --   },
-          --   python = {
-          --     analysis = {
-          --       -- Ignore all files for analysis to exclusively use Ruff for linting
-          --       ignore = { "*" },
-          --     },
-          --   },
-          -- },
         },
         ansiblels = {},
         arduino_language_server = {},
         volar = { settings = {} },
         ruff_lsp = {},
         tsserver = {},
+        groovyls = { mason = false },
       },
       setup = {
-        -- example to setup with typescript.nvim
         tsserver = function(_, opts)
           require("typescript").setup({ server = opts })
           return true
         end,
-        -- Specify * to use this function as a fallback for any server
-        -- ["*"] = function(server, opts) end,
+        groovyls = function(_, opts)
+          require("lspconfig").groovyls.setup({
+            cmd = { "java", "-jar", vim.env.HOME .. "/bin/groovy-language-server-all.jar" },
+          })
+          return true
+        end,
       },
     },
   },
@@ -135,10 +126,10 @@ return {
         cuda = { "clang_format" },
         go = { "gofmt", "goimports" },
         graphql = { "prettier" },
-        groovy = { "npm-groovy-lint" },
+        groovy = { "npm_groovy_lint" },
         handlebars = { "prettier" },
-        htmldjango = { "prettier" },
         html = { "prettier" },
+        htmldjango = { "prettier" },
         java = { "google_java_format" },
         javascript = { "prettier" },
         javascriptreact = { "prettier" },
@@ -165,6 +156,10 @@ return {
         },
         shfmt = {
           prepend_args = { "-i", "2" },
+        },
+        npm_groovy_lint = {
+          command = "/usr/local/bin/npm-groovy-lint",
+          prepend_args = { "--format" },
         },
       },
     },
