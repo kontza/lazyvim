@@ -40,6 +40,7 @@ return {
         typescript = { "prettier" },
         typescriptreact = { "prettier" },
         vue = { "prettier" },
+        xml = { "xmllint" },
         yaml = { "prettier" },
       },
       -- Customize formatters
