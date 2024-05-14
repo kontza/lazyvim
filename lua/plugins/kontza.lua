@@ -4,6 +4,120 @@ return {
     dependencies = "nvim-lua/plenary.nvim",
   },
 
+  -- add pyright to lspconfig
+  {
+    "neovim/nvim-lspconfig",
+    ---@class PluginLspOpts
+    opts = {
+      dependencies = {
+        "jose-elias-alvarez/typescript.nvim",
+        init = function()
+          require("lazyvim.util").lsp.on_attach(function(_, buffer)
+          -- stylua: ignore
+          vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
+            vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
+          end)
+        end,
+      },
+      servers = {
+        -- pyright will be automatically installed with mason and loaded with lspconfig
+        gopls = {},
+        pyright = {
+          mason = false,
+          -- settings = {
+          --   pyright = {
+          --     -- Using Ruff's import organizer
+          --     disableOrganizeImports = true,
+          --   },
+          --   python = {
+          --     analysis = {
+          --       -- Ignore all files for analysis to exclusively use Ruff for linting
+          --       ignore = { "*" },
+          --     },
+          --   },
+          -- },
+        },
+        ansiblels = {},
+        arduino_language_server = {},
+        volar = { settings = {} },
+        ruff_lsp = {},
+        tsserver = {},
+      },
+      setup = {
+        -- example to setup with typescript.nvim
+        tsserver = function(_, opts)
+          require("typescript").setup({ server = opts })
+          return true
+        end,
+        -- Specify * to use this function as a fallback for any server
+        -- ["*"] = function(server, opts) end,
+      },
+    },
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      -- add tsx and treesitter
+      vim.list_extend(opts.ensure_installed, {
+        "bash",
+        "go",
+        "html",
+        "javascript",
+        "json",
+        "lua",
+        "markdown",
+        "markdown_inline",
+        "python",
+        "query",
+        "regex",
+        "rust",
+        "tsx",
+        "typescript",
+        "vim",
+        "vue",
+        "yaml",
+      })
+    end,
+  },
+
+  -- add telescope-fzf-native
+  {
+    "telescope.nvim",
+    dependencies = {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
+      config = function()
+        require("telescope").load_extension("fzf")
+        require("telescope").load_extension("notify")
+      end,
+    },
+  },
+
+  -- add symbols-outline
+  {
+    "simrat39/symbols-outline.nvim",
+    cmd = "SymbolsOutline",
+    keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
+    config = true,
+  },
+
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ui = {
+        border = vim.g.border_type,
+      },
+      ensure_installed = {
+        "stylua",
+        "shellcheck",
+        "shfmt",
+        "ruff-lsp",
+        "ansible-lint",
+      },
+    },
+  },
+
   { "HiPhish/rainbow-delimiters.nvim" },
   { "aklt/plantuml-syntax" },
   { "dhruvasagar/vim-table-mode" },
