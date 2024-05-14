@@ -21,6 +21,7 @@ return {
         cuda = { "clang_format" },
         go = { "gofmt", "goimports" },
         graphql = { "prettier" },
+        groovy = { "npm-groovy-lint" },
         handlebars = { "prettier" },
         htmldjango = { "prettier" },
         html = { "prettier" },
