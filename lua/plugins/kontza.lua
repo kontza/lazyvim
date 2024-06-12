@@ -28,14 +28,9 @@ return {
         arduino_language_server = {},
         volar = { settings = {} },
         ruff_lsp = {},
-        tsserver = {},
         groovyls = { mason = false },
       },
       setup = {
-        tsserver = function(_, opts)
-          require("typescript").setup({ server = opts })
-          return true
-        end,
         groovyls = function(_, opts)
           require("lspconfig").groovyls.setup({
             cmd = { "java", "-jar", vim.env.HOME .. "/bin/groovy-language-server-all.jar" },
@@ -139,7 +134,7 @@ return {
         lua = { "stylua" },
         proto = { "clang_format" },
         python = { "ruff_fix", "ruff_format" },
-        rust = { "rustfmt" },
+        -- rust = { "rustfmt" },
         scss = { "prettier" },
         svelte = { "prettier" },
         toml = { "prettier" },
@@ -215,16 +210,6 @@ return {
         },
       })
     end,
-  },
-
-  {
-    "simrat39/rust-tools.nvim",
-    dependencies = "neovim/nvim-lspconfig",
-    opts = {
-      server = {
-        cmd = { "ra-multiplex" },
-      },
-    },
   },
 
   { "lewis6991/spaceless.nvim" },
