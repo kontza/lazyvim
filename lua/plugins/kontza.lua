@@ -1,4 +1,5 @@
 return {
+  { "ziglang/zig.vim" },
   {
     "ckipp01/nvim-jenkinsfile-linter",
     dependencies = "nvim-lua/plenary.nvim",
@@ -28,6 +29,7 @@ return {
         arduino_language_server = {},
         volar = { settings = {} },
         ruff_lsp = {},
+        zls = { mason = false },
         groovyls = { mason = false },
       },
       setup = {
