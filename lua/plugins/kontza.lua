@@ -1,4 +1,23 @@
 return {
+  {
+    "renerocksai/telekasten.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    config = function()
+      require("telekasten").setup({
+        home = vim.fn.expand("~/wiki"), -- Put the name of your notes directory here
+        weeklies = vim.fn.expand("~/wiki/weeklies"),
+        vaults = {
+          omat = {
+            home = vim.fn.expand("~/wiki/omat"),
+          },
+          vnk = {
+            home = vim.fn.expand("~/wiki/vnk"),
+          },
+        },
+      })
+    end,
+  },
+  { "nvim-telekasten/calendar-vim" },
   { "ziglang/zig.vim" },
   {
     "ckipp01/nvim-jenkinsfile-linter",
