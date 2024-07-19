@@ -84,6 +84,7 @@ return {
         "vim",
         "vue",
         "yaml",
+        "zig",
       })
     end,
   },
