@@ -49,6 +49,7 @@ return {
       servers = {
         gopls = {},
         pyright = {
+          enabled = false,
           mason = false,
         },
         ansiblels = {},
