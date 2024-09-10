@@ -48,10 +48,7 @@ return {
     opts = {
       servers = {
         gopls = {},
-        pyright = {
-          enabled = false,
-          mason = false,
-        },
+        pyright = {},
         ansiblels = {},
         arduino_language_server = {},
         volar = { settings = {} },
@@ -65,6 +62,22 @@ return {
             cmd = { "java", "-jar", vim.env.HOME .. "/bin/groovy-language-server-all.jar" },
           })
           return true
+        end,
+        pyright = function()
+          require("lspconfig").pyright.setup({
+            settings = {
+              pyright = {
+                -- Using Ruff's import organizer
+                disableOrganizeImports = true,
+              },
+              python = {
+                analysis = {
+                  -- Ignore all files for analysis to exclusively use Ruff for linting
+                  ignore = { "*" },
+                },
+              },
+            },
+          })
         end,
       },
     },
