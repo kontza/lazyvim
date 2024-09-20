@@ -218,21 +218,20 @@ return {
 
   { "khaveesh/vim-fish-syntax" },
 
-  {
-    "folke/noice.nvim",
-    commit = "d9328ef903168b6f52385a751eb384ae7e906c6f",
-    config = function()
-      local noice = require("noice")
-      noice.setup({
-        routes = {
-          {
-            view = "notify",
-            filter = { event = "msg_showmode" },
-          },
-        },
-      })
-    end,
-  },
+  -- {
+  --   "folke/noice.nvim",
+  --   config = function()
+  --     local noice = require("noice")
+  --     noice.setup({
+  --       routes = {
+  --         {
+  --           view = "notify",
+  --           filter = { event = "msg_showmode" },
+  --         },
+  --       },
+  --     })
+  --   end,
+  -- },
 
   {
     "L3MON4D3/LuaSnip",
