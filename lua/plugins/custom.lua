@@ -190,6 +190,7 @@ return {
       -- Customize formatters
       formatters = {
         prettier = {
+          command = "/usr/local/bin/prettier",
           prepend_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
         },
         shfmt = {
