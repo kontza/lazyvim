@@ -1,5 +1,36 @@
 return {
   {
+    "rafamadriz/friendly-snippets",
+    config = function()
+      local ls = require("luasnip")
+      -- local log = require("luasnip.util.log").new("custom")
+      -- ls.log.set_loglevel("debug")
+      require("luasnip.loaders.from_vscode").lazy_load()
+      ls.add_snippets("all", {
+        ls.snippet({
+          trig = "jrnltimestamp",
+          name = "jrnltimestamp",
+          snippetType = "snippet",
+          desc = "Insert a jrnl compliant timestamp",
+        }, {
+          ls.text_node(
+            os.date("%Y")
+              .. "-"
+              .. os.date("%m")
+              .. "-"
+              .. os.date("%d")
+              .. " "
+              .. os.date("%a")
+              .. " "
+              .. os.date("%H")
+              .. ":"
+              .. os.date("%M")
+          ),
+        }),
+      })
+    end,
+  },
+  {
     "MeanderingProgrammer/render-markdown.nvim",
     opts = {},
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
