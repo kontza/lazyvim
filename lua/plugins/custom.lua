@@ -250,21 +250,6 @@ return {
 
   { "khaveesh/vim-fish-syntax" },
 
-  -- {
-  --   "folke/noice.nvim",
-  --   config = function()
-  --     local noice = require("noice")
-  --     noice.setup({
-  --       routes = {
-  --         {
-  --           view = "notify",
-  --           filter = { event = "msg_showmode" },
-  --         },
-  --       },
-  --     })
-  --   end,
-  -- },
-
   {
     "L3MON4D3/LuaSnip",
     config = function()
