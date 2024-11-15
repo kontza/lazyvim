@@ -142,17 +142,17 @@ return {
   },
 
   -- add telescope-fzf-native
-  {
-    "telescope.nvim",
-    dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
-      config = function()
-        require("telescope").load_extension("fzf")
-        require("telescope").load_extension("notify")
-      end,
-    },
-  },
+  -- {
+  --   "telescope.nvim",
+  --   dependencies = {
+  --     "nvim-telescope/qq",
+  --     build = "make",
+  --     config = function()
+  --       require("telescope").load_extension("fzf")
+  --       require("telescope").load_extension("notify")
+  --     end,
+  --   },
+  -- },
 
   -- add symbols-outline
   {
