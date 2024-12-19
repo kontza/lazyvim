@@ -1,6 +1,44 @@
+-- Declare a global function to retrieve the current directory
+function _G.get_oil_winbar()
+  local dir = require("oil").get_current_dir()
+  if dir then
+    return vim.fn.fnamemodify(dir, ":~")
+  else
+    -- If there is no current directory (e.g. over ssh), just show the buffer name
+    return vim.api.nvim_buf_get_name(0)
+  end
+end
+
 return {
   {
+    "jakobkhansen/journal.nvim",
+    config = function()
+      require("journal").setup({
+        root = "~/wiki",
+      })
+    end,
+  },
+  {
     "stevearc/oil.nvim",
+    config = function()
+      local detail = false
+      require("oil").setup({
+        win_options = { winbar = "%!v:lua.get_oil_winbar()" },
+        keymaps = {
+          ["gd"] = {
+            desc = "Toggle file detail view",
+            callback = function()
+              detail = not detail
+              if detail then
+                require("oil").set_columns({ "icon", "permissions", "size", "mtime" })
+              else
+                require("oil").set_columns({ "icon" })
+              end
+            end,
+          },
+        },
+      })
+    end,
     opts = {},
     dependencies = { { "echasnovski/mini.icons", opts = {} } },
   },
@@ -38,33 +76,8 @@ return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
     opts = {},
-    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
-    config = function()
-      require("render-markdown").setup({
-        file_types = { "markdown", "telekasten" },
-      })
-      vim.treesitter.language.register("markdown", "telekasten")
-    end,
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
   },
-  {
-    "renerocksai/telekasten.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim" },
-    config = function()
-      require("telekasten").setup({
-        home = vim.fn.expand("~/wiki"), -- Put the name of your notes directory here
-        weeklies = vim.fn.expand("~/wiki/weeklies"),
-        vaults = {
-          omat = {
-            home = vim.fn.expand("~/wiki/omat"),
-          },
-          work = {
-            home = vim.fn.expand("~/wiki/work"),
-          },
-        },
-      })
-    end,
-  },
-  { "nvim-telekasten/calendar-vim" },
   { "ziglang/zig.vim" },
 
   -- lspconfig
@@ -275,8 +288,6 @@ return {
   { "dkarter/bullets.vim" },
 
   { "pearofducks/ansible-vim" },
-
-  { "lervag/wiki" },
 
   { "mfussenegger/nvim-jdtls" },
 
