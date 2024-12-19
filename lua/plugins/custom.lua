@@ -1,5 +1,10 @@
 return {
   {
+    "stevearc/oil.nvim",
+    opts = {},
+    dependencies = { { "echasnovski/mini.icons", opts = {} } },
+  },
+  {
     "rafamadriz/friendly-snippets",
     config = function()
       local ls = require("luasnip")
