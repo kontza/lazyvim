@@ -27,6 +27,7 @@ map({ "n" }, "<leader>zn", "<cmd>Telekasten new_note<CR>")
 map({ "n" }, "<leader>zc", "<cmd>Telekasten show_calendar<CR>")
 map({ "n" }, "<leader>zb", "<cmd>Telekasten show_backlinks<CR>")
 map({ "n" }, "<leader>zI", "<cmd>Telekasten insert_img_link<CR>")
+map({ "n" }, "-", "<cmd>Oil<CR>")
 
 -- Call insert link automatically when we start typing a link
 map({ "i" }, "[[", "<cmd>Telekasten insert_link<CR>")
