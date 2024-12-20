@@ -17,3 +17,6 @@ map({ "n" }, "-", "<cmd>Oil<CR>")
 
 -- Shortcut to Journal week
 map({ "n" }, "<leader>z", "<cmd>Journal week<CR>")
+
+-- Show buffers
+map({ "n", "v" }, "<leader><tab>", '<cmd>FzfLua buffers winopts.preview.hidden="hidden"<CR>')

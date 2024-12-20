@@ -19,6 +19,14 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "fzf",
+  callback = function()
+    vim.wo.number = false
+    vim.wo.relativenumber = false
+  end,
+})
+
 vim.api.nvim_create_autocmd("BufLeave", {
   pattern = "oil",
   callback = function()
