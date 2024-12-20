@@ -19,4 +19,6 @@ map({ "n" }, "-", "<cmd>Oil<CR>")
 map({ "n" }, "<leader>z", "<cmd>Journal week<CR>")
 
 -- Show buffers
-map({ "n", "v" }, "<leader><tab>", '<cmd>FzfLua buffers winopts.preview.hidden="hidden"<CR>')
+map({ "n", "v" }, "<leader><tab>", function()
+  require("fzf-lua").buffers({ winopts = { preview = { hidden = "hidden" } } })
+end, { desc = "Show open buffers" })
