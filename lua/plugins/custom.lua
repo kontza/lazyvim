@@ -43,37 +43,6 @@ return {
     dependencies = { { "echasnovski/mini.icons", opts = {} } },
   },
   {
-    "rafamadriz/friendly-snippets",
-    config = function()
-      local ls = require("luasnip")
-      -- local log = require("luasnip.util.log").new("custom")
-      -- ls.log.set_loglevel("debug")
-      require("luasnip.loaders.from_vscode").lazy_load()
-      ls.add_snippets("all", {
-        ls.snippet({
-          trig = "jrnltimestamp",
-          name = "jrnltimestamp",
-          snippetType = "snippet",
-          desc = "Insert a jrnl compliant timestamp",
-        }, {
-          ls.text_node(
-            os.date("%Y")
-              .. "-"
-              .. os.date("%m")
-              .. "-"
-              .. os.date("%d")
-              .. " "
-              .. os.date("%a")
-              .. " "
-              .. os.date("%H")
-              .. ":"
-              .. os.date("%M")
-          ),
-        }),
-      })
-    end,
-  },
-  {
     "MeanderingProgrammer/render-markdown.nvim",
     opts = {},
     dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
@@ -270,10 +239,24 @@ return {
 
   {
     "L3MON4D3/LuaSnip",
-    config = function()
-      require("luasnip").filetype_extend("svelte", { "javascript" })
-      require("luasnip").filetype_extend("typescript", { "javascript" })
-    end,
+    lazy = true,
+    dependencies = {
+      {
+        "rafamadriz/friendly-snippets",
+        config = function()
+          require("luasnip.loaders.from_vscode").lazy_load()
+          require("luasnip.loaders.from_lua").lazy_load({ paths = { vim.fn.stdpath("config") .. "/luasnippets" } })
+          local ls = require("luasnip")
+          ls.log.set_loglevel("debug")
+          ls.filetype_extend("svelte", { "javascript" })
+          ls.filetype_extend("typescript", { "javascript" })
+        end,
+      },
+    },
+    opts = {
+      history = true,
+      delete_check_events = "TextChanged",
+    },
   },
 
   { "leafOfTree/vim-svelte-plugin" },
