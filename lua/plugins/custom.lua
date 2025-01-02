@@ -47,7 +47,6 @@ return {
     opts = {},
     dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
   },
-  { "ziglang/zig.vim" },
 
   -- lspconfig
   {
@@ -127,19 +126,6 @@ return {
       })
     end,
   },
-
-  -- add telescope-fzf-native
-  -- {
-  --   "telescope.nvim",
-  --   dependencies = {
-  --     "nvim-telescope/qq",
-  --     build = "make",
-  --     config = function()
-  --       require("telescope").load_extension("fzf")
-  --       require("telescope").load_extension("notify")
-  --     end,
-  --   },
-  -- },
 
   -- add symbols-outline
   {
