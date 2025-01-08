@@ -1,4 +1,4 @@
--- Keymaps are automatically loaded on the VeryLazy event
+-- Keymaps are autOmatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 local map = vim.keymap.set
@@ -19,6 +19,6 @@ map({ "n" }, "-", "<cmd>Oil<CR>")
 map({ "n" }, "<leader>z", "<cmd>Journal week<CR>")
 
 -- Show buffers
-map({ "n", "v" }, "<leader><tab>", function()
+map({ "n", "v" }, "<tab>", function()
   require("fzf-lua").buffers({ winopts = { preview = { hidden = "hidden" } } })
 end, { desc = "Show open buffers" })
