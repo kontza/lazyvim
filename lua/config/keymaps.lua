@@ -3,7 +3,7 @@
 -- Add any additional keymaps here
 local map = vim.keymap.set
 
-map("n", "<leader>fc", "<cmd>let @+ = expand('%:p')<cr>", {
+map("n", "<leader>fy", "<cmd>let @+ = expand('%:p')<cr>", {
   desc = "Yank current buffer's absolute path",
 })
 map({ "n", "v" }, "ga.", "<cmd>TextCaseOpenTelescope<CR>", { desc = "Text case conversions" })
