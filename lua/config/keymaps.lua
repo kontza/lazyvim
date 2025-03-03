@@ -6,7 +6,9 @@ local map = vim.keymap.set
 map("n", "<leader>fy", "<cmd>let @+ = expand('%:p')<cr>", {
   desc = "Yank current buffer's absolute path",
 })
-map({ "n", "v" }, "ga.", "<cmd>TextCaseOpenTelescope<CR>", { desc = "Text case conversions" })
+map({ "n", "v" }, "ga.", function()
+  require("config/textcase-picker")()
+end, { desc = "Text case conversions" })
 map({ "n", "v" }, "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
 map({ "n", "v" }, "'", '"0')
 map({ "n", "v" }, "<leader><space>", LazyVim.pick("files", { root = false }), { desc = "Find Files (cwd)" })
