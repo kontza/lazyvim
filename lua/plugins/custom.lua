@@ -10,6 +10,7 @@ function _G.get_oil_winbar()
 end
 
 return {
+  { "yioneko/nvim-vtsls" },
   {
     "jakobkhansen/journal.nvim",
     config = function()
@@ -51,16 +52,6 @@ return {
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      "jose-elias-alvarez/typescript.nvim",
-      init = function()
-        require("lazyvim.util").lsp.on_attach(function(_, buffer)
-          -- stylua: ignore
-          vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
-          vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
-        end)
-      end,
-    },
     ---@class PluginLspOpts
     opts = {
       servers = {
@@ -71,15 +62,8 @@ return {
         volar = { settings = {} },
         ruff = {},
         zls = { mason = false },
-        groovyls = { mason = false },
       },
       setup = {
-        groovyls = function(_, _)
-          require("lspconfig").groovyls.setup({
-            cmd = { "java", "-jar", vim.env.HOME .. "/bin/groovy-language-server-all.jar" },
-          })
-          return true
-        end,
         pyright = function()
           require("lspconfig").pyright.setup({
             settings = {
