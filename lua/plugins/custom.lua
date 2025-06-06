@@ -60,6 +60,13 @@ return {
         ansiblels = {},
         arduino_language_server = {},
         volar = { settings = {} },
+        vtsls = {
+          settings = {
+            vtsls = {
+              autoUseWorkspaceTsdk = false,
+            },
+          },
+        },
         ruff = {},
         zls = { mason = false },
       },
